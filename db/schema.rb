@@ -11,6 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20150409023454) do
+
+  create_table "sounds", force: :cascade do |t|
+    t.integer  "sc_id"
+    t.text     "title"
+    t.datetime "created_at",        null: false
+    t.text     "permalink_url"
+    t.text     "tags"
+    t.text     "genre"
+    t.string   "license"
+    t.string   "sharing"
+    t.integer  "comment_count"
+    t.integer  "download_count"
+    t.boolean  "downloadable"
+    t.integer  "playback_count"
+    t.integer  "favoritings_count"
+    t.datetime "updated_at",        null: false
+  end
 
 end
