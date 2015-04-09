@@ -1,1 +1,6 @@
 <h1>THIS IS AWESOME</h1>
+<% for sound in @longestTitleSounds do %>
+  <div>
+    <%= link_to sound.title, sound.permalink_url %>
+  </div>
+<% end %>
