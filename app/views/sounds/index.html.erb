@@ -4,18 +4,25 @@
 </div>
 <div class="row">
   <div class="col-md-12" id="longest-title-canvas-holder">
+    <h4>Title Length</h4>
     <canvas id="longest-titles-chart-area"/>
   </div>
-  <div class="col-md-8" id="popularity-canvas-holder">
+  <div class="col-md-12" id="popularity-canvas-holder">
+    <h4>Popularity Metrics</h4>
     <canvas id="popularity-chart-area"/>
   </div>
-  <% i = 1 %>
-  <% for sound in @mostPopularSongs do %>
-    <div class="col-md-4">
-      <%= link_to "#{i} (" + truncate(sound.genre.upcase, length: 20) + "): " + truncate(sound.title), sound.permalink_url %>
+</div>
+<div class="row">
+  <h4>Track Links:</h4>
+  <div class="col-md-12">
+    <div class="list-group">
+      <% i = 1 %>
+      <% for sound in @mostPopularSongs do %>
+        <%= link_to "##{i} (" + sound.genre.upcase + "): " + sound.title, sound.permalink_url, :class => "list-group-item" %>
+        <% i += 1 %>
+      <% end %>
     </div>
-    <% i += 1 %>
-  <% end %>
+  </div>
 </div>
 
 
