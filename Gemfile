@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'soundcloud', '~> 0.3.2'
 
 # Bootstrap integration
-gem 'bootstrap-sass', '~>3.2.0'
+gem 'bootstrap-sass', '~> 3.3.4'
 gem 'autoprefixer-rails'
 
 # Use ActiveModel has_secure_password
