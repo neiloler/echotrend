@@ -1,15 +1,18 @@
 <div class="row">
   <div class="col-md-8" id="canvas-holder">
     <canvas id="longest-titles-chart-area"/>
-    <div id="legendDiv"></div>
   </div>
   <% i = 1 %>
   <% for sound in @longestTitleSounds do %>
     <div class="col-md-4">
-      <%= link_to "#{i}: "+sound.title[0..40].gsub(/\s\w+\s*$/, '...'), sound.permalink_url %>
+      <%= link_to "#{i} (" + truncate(sound.genre.upcase, length: 10) + "): " + truncate(sound.title), sound.permalink_url %>
     </div>
     <% i += 1 %>
   <% end %>
+</div>
+<div class="row">
+  <h4>Slice: How does title length affect downloads?</h4>
+  <p>After pulling in ~2000 tracks from various genres, sorting for popularity, how does track title length stack up?</p>
 </div>
 
 <%= javascript_tag do %>
@@ -19,6 +22,7 @@
   var trackFavoritings = [];
   var trackComments = [];
   var trackPlays = [];
+
   <% for sound in @longestTitleSounds do %>
     trackLabels.push("<%= sound.title[0..14] %>");
     trackDownloads.push(<%= sound.download_count %>);
@@ -26,14 +30,15 @@
     trackComments.push(<%= sound.comment_count %>);
     trackPlays.push(<%= sound.playback_count %>);
   <% end %>
-  var barChartData = {
+
+  var longestBarChartData = {
     labels : trackLabels,
     datasets : [
       {
         label: "Downloads",
-        fillColor : "rgba(220,220,220,0.5)",
+        fillColor : "rgba(255,106,0,0.5)",
         strokeColor : "rgba(220,220,220,0.8)",
-        highlightFill: "rgba(220,220,220,0.75)",
+        highlightFill: "rgba(212,118,51,0.75)",
         highlightStroke: "rgba(220,220,220,1)",
         data : trackDownloads
       },
@@ -66,11 +71,16 @@
 
   window.onload = function(){
     var ctx = document.getElementById("longest-titles-chart-area").getContext("2d");
+    window.myBar = new Chart(ctx).Bar(longestBarChartData, {
+      responsive : true,
+      multiTooltipTemplate: "<%%= datasetLabel %>: <%%= value %>"
+    });
+
+    var ctx = document.getElementById("shortest-titles-chart-area").getContext("2d");
     window.myBar = new Chart(ctx).Bar(barChartData, {
       responsive : true,
       multiTooltipTemplate: "<%%= datasetLabel %>: <%%= value %>"
     });
-    document.getElementById("legendDiv").innerHTML = window.myBar.generateLegend();
   }
 
 <% end %>
