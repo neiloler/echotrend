@@ -2,5 +2,6 @@
 <% for sound in @longestTitleSounds do %>
   <div>
     <%= link_to sound.title, sound.permalink_url %>
+    <b>--- Plays: <%= sound.playback_count %> | Genre: <%= sound.genre %></b>
   </div>
 <% end %>
