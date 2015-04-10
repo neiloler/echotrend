@@ -2,7 +2,8 @@ desc "Grab data from soundcloud"
 task :populate_from_soundcloud => :environment do
 
   print "Setting up client..."
-  client = SoundCloud.new(:client_id => Rails.application.secrets.SOUND_CLOUD_CLIENT_ID)
+  # client = SoundCloud.new(:client_id => Rails.application.secrets.SOUND_CLOUD_CLIENT_ID)
+  client = SoundCloud.new(:client_id => ENV['SOUND_CLOUD_CLIENT_ID'])
   print "DONE\n"
 
   genres = ["popular", "ambient", "electronic", "hiphop", "rap", "reggaeton", "rock", "country", "mashup", "classical", "alternative"]
