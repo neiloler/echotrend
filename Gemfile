@@ -34,6 +34,8 @@ gem 'soundcloud', '~> 0.3.2'
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'autoprefixer-rails'
 
+gem 'rails_12factor', group: :production
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -54,3 +56,5 @@ group :development, :test do
   gem 'spring'
 end
 
+# Specify ruby version
+ruby "2.2.0"
