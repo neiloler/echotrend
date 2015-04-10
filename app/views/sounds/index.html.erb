@@ -1,53 +1,76 @@
-<div id="canvas-holder">
-  <canvas id="chart-area" width="500" height="500"/>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>EchoTrack</h1>
-      <h3>You make the waves, we'll help you understand them.</h3>
+<div class="row">
+  <div class="col-md-8" id="canvas-holder">
+    <canvas id="longest-titles-chart-area"/>
+    <div id="legendDiv"></div>
+  </div>
+  <% i = 1 %>
+  <% for sound in @longestTitleSounds do %>
+    <div class="col-md-4">
+      <%= link_to "#{i}: "+sound.title[0..40].gsub(/\s\w+\s*$/, '...'), sound.permalink_url %>
     </div>
-  </div>
-  <div class="row">
-    <% for sound in @longestTitleSounds do %>
-      <div class="col-md-6">
-        <%= link_to sound.title, sound.permalink_url %>
-        <b>--- Plays: <%= sound.playback_count %> | Genre: <%= sound.genre %></b>
-      </div>
-    <% end %>
-  </div>
+    <% i += 1 %>
+  <% end %>
 </div>
 
 <%= javascript_tag do %>
 
-    var doughnutData = [
-        {
-          value: 1,
-          label: "One"
-        },
-        {
-          value: 2,
-          label: "Two"
-        },
-        {
-          value: 3,
-          label: "Three"
-        },
-        {
-          value: 4,
-          label: "Four"
-        },
-        {
-          value: 5,
-          label: "Five"
-        }
+  var trackLabels = [];
+  var trackDownloads = [];
+  var trackFavoritings = [];
+  var trackComments = [];
+  var trackPlays = [];
+  <% for sound in @longestTitleSounds do %>
+    trackLabels.push("<%= sound.title[0..14] %>");
+    trackDownloads.push(<%= sound.download_count %>);
+    trackFavoritings.push(<%= sound.favoritings_count %>);
+    trackComments.push(<%= sound.comment_count %>);
+    trackPlays.push(<%= sound.playback_count %>);
+  <% end %>
+  var barChartData = {
+    labels : trackLabels,
+    datasets : [
+      {
+        label: "Downloads",
+        fillColor : "rgba(220,220,220,0.5)",
+        strokeColor : "rgba(220,220,220,0.8)",
+        highlightFill: "rgba(220,220,220,0.75)",
+        highlightStroke: "rgba(220,220,220,1)",
+        data : trackDownloads
+      },
+      {
+        label: "Favoritings",
+        fillColor : "rgba(151,187,205,0.5)",
+        strokeColor : "rgba(151,187,205,0.8)",
+        highlightFill : "rgba(151,187,205,0.75)",
+        highlightStroke : "rgba(151,187,205,1)",
+        data : trackFavoritings
+      },
+      {
+        label: "Comments",
+        fillColor : "rgba(151,187,205,0.5)",
+        strokeColor : "rgba(151,187,205,0.8)",
+        highlightFill : "rgba(151,187,205,0.75)",
+        highlightStroke : "rgba(151,187,205,1)",
+        data : trackComments
+      },
+      {
+        label: "Plays",
+        fillColor : "rgba(151,187,205,0.5)",
+        strokeColor : "rgba(151,187,205,0.8)",
+        highlightFill : "rgba(151,187,205,0.75)",
+        highlightStroke : "rgba(151,187,205,1)",
+        data : trackPlays
+      }
+    ]
+  }
 
-      ];
-
-      window.onload = function(){
-        var ctx = document.getElementById("chart-area").getContext("2d");
-        window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
-      };
+  window.onload = function(){
+    var ctx = document.getElementById("longest-titles-chart-area").getContext("2d");
+    window.myBar = new Chart(ctx).Bar(barChartData, {
+      responsive : true,
+      multiTooltipTemplate: "<%%= datasetLabel %>: <%%= value %>"
+    });
+    document.getElementById("legendDiv").innerHTML = window.myBar.generateLegend();
+  }
 
 <% end %>
