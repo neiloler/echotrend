@@ -18,7 +18,7 @@
     <div class="list-group">
       <% i = 1 %>
       <% for sound in @mostPopularSongs do %>
-        <%= link_to "##{i} (" + sound.genre + "): " + sound.title, sound.permalink_url, :class => "list-group-item" %>
+        <%= link_to "##{i} (" + if sound.genre.blank? then "NONE" else sound.genre end + "): " + sound.title, sound.permalink_url, :class => "list-group-item" %>
         <% i += 1 %>
       <% end %>
     </div>
