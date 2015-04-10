@@ -25,10 +25,6 @@ task :populate_from_soundcloud => :environment do
     print "DONE (TRACK COUNT: #{tracks.collection.count})\n"
   end
 
-  # if (tracks.collection.count < (2000 * genres.count))
-  #   raise "Should have collected 2000 tracks from each genre."
-  # end
-
   print "Saving tracks to database...\\"
   tracks.collection.each do |track|
     if track.kind == "track" # This check could unneccessary, but I don't trust the API data completely at this point
