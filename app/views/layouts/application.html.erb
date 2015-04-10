@@ -7,8 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header text-inverse">
+      <div class="navbar-brand">
+        EchoTrack: 
+        <small>
+          You make the waves, we'll help you understand them.
+        </small>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <%= yield %>
+</div>
 </body>
 </html>
