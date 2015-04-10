@@ -13,4 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-sprockets
+
+//= require Chart.Core
+//= require Chart.Bar
+//= require Chart.Doughnut
+//= require Chart.Line
+//= require Chart.PolarArea
+//= require Chart.Radar
+
 //= require_tree .
+
+
