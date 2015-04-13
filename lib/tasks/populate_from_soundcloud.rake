@@ -1,6 +1,9 @@
 desc "Grab data from soundcloud"
 task :populate_from_soundcloud => :environment do
 
+  # This isn't exactly the best option for record keeping over time, but I'm keeping this thing free for now, and I don't want to pay for Heroku's DB service for now.
+  Sound.destroy_all
+
   print "Setting up client..."
   client = SoundCloud.new(:client_id => ENV['SOUND_CLOUD_CLIENT_ID'])
   print "DONE\n"
