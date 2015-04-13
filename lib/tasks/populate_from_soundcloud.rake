@@ -32,7 +32,7 @@ task :populate_from_soundcloud => :environment do
   if Rails.env.development? then print "\\" end
   tracks.collection.each do |track|
     # We only want tracks (protection again user or other types) that are interesting
-    if track.kind == "track" and track.download_count > 0 and track.favoritings_count > 0 and track.comment_count > 0 and track.playback_count > 0
+    if track.kind == "track" and track.download_count and track.download_count > 0 and track.favoritings_count and track.favoritings_count > 0 and track.comment_count and track.comment_count > 0 and track.playback_count and track.playback_count > 0
       if Rails.env.development? then print "\\b|" end
       if Rails.env.development? then print "\\b/" end
       sound = Sound.new :sc_id => track.id, :title => track.title, :created_at => track.created_at, :permalink_url => track.permalink_url, :tags => track.tag_list, :genre => track.genre, :license => track.license, :sharing => track.sharing, :comment_count => track.comment_count, :download_count => track.download_count, :downloadable => track.downloadable, :playback_count => track.playback_count, :favoritings_count => track.favoritings_count
