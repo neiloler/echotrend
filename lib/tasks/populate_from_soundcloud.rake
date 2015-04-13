@@ -18,13 +18,13 @@ task :populate_from_soundcloud => :environment do
     tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 0, :q => genre, :linked_partitioning => 1).collection
     tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 200, :q => genre, :linked_partitioning => 2).collection
     tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 400, :q => genre, :linked_partitioning => 3).collection
-    tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 600, :q => genre, :linked_partitioning => 4).collection
-    tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 800, :q => genre, :linked_partitioning => 5).collection
-    tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 1000, :q => genre, :linked_partitioning => 6).collection
-    tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 1200, :q => genre, :linked_partitioning => 7).collection
-    tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 1400, :q => genre, :linked_partitioning => 8).collection
-    tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 1600, :q => genre, :linked_partitioning => 9).collection
-    tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 1800, :q => genre, :linked_partitioning => 10).collection
+    # tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 600, :q => genre, :linked_partitioning => 4).collection
+    # tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 800, :q => genre, :linked_partitioning => 5).collection
+    # tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 1000, :q => genre, :linked_partitioning => 6).collection
+    # tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 1200, :q => genre, :linked_partitioning => 7).collection
+    # tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 1400, :q => genre, :linked_partitioning => 8).collection
+    # tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 1600, :q => genre, :linked_partitioning => 9).collection
+    # tracks.collection.concat client.get('/tracks', :limit => 200, :offset => 1800, :q => genre, :linked_partitioning => 10).collection
     print "DONE (TRACK COUNT: #{tracks.collection.count})\n"
   end
 
